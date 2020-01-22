@@ -1,2 +1,2 @@
-# MINST
-MINST CNN
+# MNIST
+MNIST CNN for course of computer vision.
