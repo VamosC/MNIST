@@ -3,7 +3,7 @@ from torchvision import transforms
 from PIL import Image
 
 
-class Minist(Dataset):
+class Mnist(Dataset):
     def __init__(self, images, labels):
         super().__init__()
         self.images = images

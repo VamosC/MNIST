@@ -1,8 +1,7 @@
 import torch
-import numpy
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
-from minist import Minist
+from mnist import Mnist
 from model import Convnet
 from util import process_data, count_acc, Averager, save_model
 
@@ -10,7 +9,7 @@ from util import process_data, count_acc, Averager, save_model
 def test():
     images, labels = process_data('./data/t10k-images-idx3-ubyte',
                                   './data/t10k-labels-idx1-ubyte')
-    test_set = Minist(images, labels)
+    test_set = Mnist(images, labels)
     # train_loader = DataLoader(train_set, batch_size=64,
     #                           shuffle=True, num_workers=8, pin_memory=True)
     test_loader = DataLoader(test_set, batch_size=64,
@@ -23,14 +22,14 @@ def test():
         # image, label = [_.cuda() for _ in batch]
         image, label = batch
         score = model(image)
-        acc = count_acc(score, label, aver)
+        count_acc(score, label, aver)
     print('test acc: %f' % aver.item())
 
 
 def train():
     images, labels = process_data('./data/train-images-idx3-ubyte',
                                   './data/train-labels-idx1-ubyte')
-    train_set = Minist(images, labels)
+    train_set = Mnist(images, labels)
     # train_loader = DataLoader(train_set, batch_size=64,
     #                           shuffle=True, num_workers=8, pin_memory=True)
     train_loader = DataLoader(train_set, batch_size=64,
